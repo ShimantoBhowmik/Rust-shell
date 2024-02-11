@@ -8,12 +8,16 @@ use std::env;
 fn main(){
     let mut history: Vec<String> = Vec::new();
     loop {
-        print!("> ");
+        print!("R-> ");
         stdout().flush().unwrap();
 
         let mut input = String::new();
         stdin().read_line(&mut input).unwrap();
         input = input.trim_end().to_string();
+
+        if input.trim().is_empty() {
+            continue;
+        }
 
         while input.ends_with('\\') {
             input.pop();
