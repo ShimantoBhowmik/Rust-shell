@@ -1,5 +1,5 @@
 # Rust-shell
-a simple interactive shell capable of executing simple UNIX® commands
+a simple shell capable of executing simple UNIX® commands
 
 To run:
 
