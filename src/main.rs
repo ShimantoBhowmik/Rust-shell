@@ -6,12 +6,17 @@ use std::process::Child;
 use std::env;
 
 fn main(){
+    let mut history: Vec<String> = Vec::new();
     loop {
         print!("> ");
         let _ = stdout().flush();
 
         let mut input = String::new();
         stdin().read_line(&mut input).unwrap();
+
+        if !input.trim().is_empty() {
+            history.push(input.trim().to_string());
+        }
 
         let mut commands = input.trim().split(" | ").peekable();
         let mut previous_command = None;
@@ -34,6 +39,12 @@ fn main(){
                     previous_command = None;
                 },
                 "exit" => return,
+                "history" => {
+                    for (index, command) in history.iter().enumerate() {
+                        println!("{}: {}", index + 1, command);
+                    }
+                    previous_command = None;
+                },
                 command => {
                     let stdin = previous_command
                         .map_or(
