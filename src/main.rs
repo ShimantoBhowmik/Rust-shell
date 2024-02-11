@@ -9,10 +9,21 @@ fn main(){
     let mut history: Vec<String> = Vec::new();
     loop {
         print!("> ");
-        let _ = stdout().flush();
+        stdout().flush().unwrap();
 
         let mut input = String::new();
         stdin().read_line(&mut input).unwrap();
+        input = input.trim_end().to_string();
+
+        while input.ends_with('\\') {
+            input.pop();
+            print!("> ");
+            stdout().flush().unwrap();
+
+            let mut next_input = String::new();
+            stdin().read_line(&mut next_input).unwrap();
+            input.push_str(next_input.trim_end());
+        }
 
         if !input.trim().is_empty() {
             history.push(input.trim().to_string());
@@ -41,7 +52,7 @@ fn main(){
                 "exit" => return,
                 "history" => {
                     for (index, command) in history.iter().enumerate() {
-                        println!("{}: {}", index + 1, command);
+                        println!("{}. {}", index + 1, command);
                     }
                     previous_command = None;
                 },
