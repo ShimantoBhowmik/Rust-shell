@@ -1,2 +1,5 @@
 # rush-rust-shell
-shell in rust
+a simple interactive shell capable of executing simple UNIX® commands
+
+To run:
+`cargo run`
