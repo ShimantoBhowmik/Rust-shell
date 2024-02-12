@@ -6,6 +6,8 @@ use std::env;
 fn main() {
     let mut history: Vec<String> = Vec::new();
     loop {
+        let pwd = env::current_dir().unwrap();
+        println!("{}", pwd.display());
         print!("r@shell > ");
         stdout().flush().unwrap();
 
